@@ -24,19 +24,19 @@
             if($result_delete_item) {
                 $message = "";
                 $result_code = "";
-                $message = "Delete Item Successfully";
+                $message = "Xóa sản phẩm thành công";
                 $result_code = 200;
             
             } else {
                 $message = "";
                 $result_code = "";
-                $message = "Delete Item Failed";
+                $message = "Xóa sản phẩm không thành công";
                 $result_code = 501;
             }
         } else {
             $message = "";
             $result_code = "";
-            $message = "Invoice Not Exist";
+            $message = "Sản phẩm không tồn tại";
             $result_code = 501;
         }
     }
@@ -44,7 +44,7 @@
     $result = "";
     $result = $result_code."#".$message;
 
-    header('Content-Type: application/json');
-    echo json_encode($result);
+    header("Content-type: text/html","charset=utf-8");
+    echo html_entity_decode($result);
     
 ?>

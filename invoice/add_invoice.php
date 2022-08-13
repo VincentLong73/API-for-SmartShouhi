@@ -73,19 +73,19 @@
                     }else{
                         $message = "";
                         $result_code = "";
-                        $message = "Failed";
+                        $message = "Erro";
                         $result_code = 501;
                     }
                 }else{
                     $message = "";
                     $result_code = "";
-                    $message = "Insert Invoice Failed";
+                    $message = "Thêm hóa đơn không thành công";
                     $result_code = 501;
                 }
             }else{
                 $message = "";
                 $result_code = "";
-                $message = "Id not exist";
+                $message = "Id hóa đơn không tồn tại";
                 $result_code = 501;
             }
             
@@ -101,6 +101,6 @@
     $result = "";
     $result = $result_code."#".$message;
 
-    header('Content-Type: application/json');
-    echo json_encode($result);
+    header("Content-type: text/html","charset=utf-8");
+    echo html_entity_decode($result);
 ?>

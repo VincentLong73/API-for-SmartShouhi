@@ -26,12 +26,10 @@
             $result_query = mysqli_query($connect, $query); 
             
             if($result_query) {
-                // $message = "Updated Successfully";
-                // $result = 200;
                 $message = "";
                 $result_code = "";
                 $result_code = 200;
-                $message = "Updated Successfully";
+                $message = "Cập nhật thành công";
                 
             } else {
                 // $message = "Updated Failed";
@@ -39,7 +37,7 @@
                 $message = "";
                 $result_code = "";
                 $result_code = 501;
-                $message = "Updated Failed";
+                $message = "Cập nhật không thành công";
             }
         }else{
             // Email not exist
@@ -47,7 +45,7 @@
             $message = "";
             $result_code = "";
             $result_code = 501;
-            $message = "Email not exist";
+            $message = "Email không tồn tại";
         }
 
     } else {
@@ -56,14 +54,12 @@
         $message = "";
         $result_code = "";
         $result_code = 501;
-        $message = "Please fill in all the required fields";
+        $message = "Vui lòng nhập đủ thông tin";
     }
-
     $result = "";
-    header('Content-Type: application/json');
-    $result = $result_code."#".json_encode($message);
+    $result = $result_code."#".$message;
 
-    header('Content-Type: application/json');
-    echo json_encode($result);
+    header("Content-type: text/html","charset=utf-8");
+    echo html_entity_decode($result);
     
 ?>

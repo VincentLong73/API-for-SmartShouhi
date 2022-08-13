@@ -30,26 +30,22 @@
                 $query_update_pass = "UPDATE user SET pass_word = SHA1('$pass_word_new') WHERE email = '{$email}'";
                 $result_update = mysqli_query($connect, $query_update_pass); 
                 if($result_update) {
-                    //$message = "Updated Successfully";
-                    // $result = 200;
+
                     $message = "";
                     $result_code = "";
                     $result_code = 200;
-                    $message = "Updated Successfully";
+                    $message = "Cập nhật thành công";
                     
                 } else {
-                    //$message = "Updated Failed";
-                    // $result = 401;
+
                     $message = "";
                     $result_code = "";
                     $result_code = 501;
-                    $message = "Updated Failed";
+                    $message = "Cập nhật không thành công";
                     
                 }
-                //echo $message;
             }else{
-                //echo 'Nhap sai pass cu';
-                // $result = 201;
+
                 $message = "";
                 $result_code = "";
                 $message = "Nhap sai pass cu";
@@ -58,19 +54,17 @@
             
 
         }else{
-            //echo $message = "Email Not exist";
             $message = "";
             $result_code = "";
-            $message = "Email Not exist";
+            $message = "Email không tồn tại";
             $result_code = 501;
         }
 
-        $result = "";
-        header('Content-Type: application/json');
-        $result = $result_code."#".json_encode($message);
 
-        header('Content-Type: application/json');
-        echo json_encode($result);
+        $result = "";
+        $result = $result_code."#".$message;
+        header("Content-type: text/html","charset=utf-8");
+        echo html_entity_decode($result);
 
 
     }

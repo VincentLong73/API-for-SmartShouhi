@@ -27,19 +27,19 @@
 
                 $message = "";
                 $result_code = "";
-                $message = "Updated Invoice Successfully";
+                $message = "Cập nhật thành công";
                 $result_code = 200;
                 
             } else {
                 $message = "";
                 $result_code = "";
-                $message = "Updated Invoice Failed";
+                $message = "Cập nhật không thành công";
                 $result_code = 501;
             }
         }else{
             $message = "";
             $result_code = "";
-            $message = "Invoice Not Exist";
+            $message = "Hóa đơn không tồn tại";
             $result_code = 501;
         }
 
@@ -48,14 +48,14 @@
         // $message = "Please fill in all the required fields";
         $message = "";
         $result_code = "";
-        $message = "Please fill in all the required fields";
+        $message = "Vui lòng nhập đủ thông tin các trường";
         $result_code = 501;
     }
 
     $result = "";
     $result = $result_code."#".$message;
 
-    header('Content-Type: application/json');
-    echo json_encode($result);
+    header("Content-type: text/html","charset=utf-8");
+    echo html_entity_decode($result);
     
 ?>

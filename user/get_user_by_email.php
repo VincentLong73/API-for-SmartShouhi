@@ -8,30 +8,23 @@
     $result_code = 404;
     $message = "Not Found";
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         // Bat dau xu ly form. Tao bien $errors
         $errors = array();
 
         
         // Validate email
-        if(isset($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-            $e = mysqli_real_escape_string($connect, $_POST['email']); 
+        if(isset($_GET['email']) && filter_var($_GET['email'], FILTER_VALIDATE_EMAIL)) {
+            $e = mysqli_real_escape_string($connect, $_GET['email']); 
         } else {
             $errors[] = 'email';
         }
         
-        // Validate password
-        if(isset($_POST['password']) && preg_match('/^[\w]{4,20}$/', $_POST['password'])) {
-            $p = mysqli_real_escape_string($connect, $_POST['password']);
-        } else {
-            $errors[] = 'password';
-        }
-
         
         if(empty($errors)) {
             // Bat dau truy van CSDL de lay thong tin nguoi dung
-            $query = "SELECT id, user_name, full_name, phone, date_of_birth FROM user WHERE email = '{$e}' AND pass_word = SHA1('$p') AND active = 1";
+            $query = "SELECT id, user_name, full_name, phone, date_of_birth FROM user WHERE email = '{$e}'";
             
             // echo $query;
             mysqli_query($connect, "SET NAMES 'utf8'");
@@ -53,7 +46,7 @@
             } else {
                 $message = "";
                 $result_code = "";
-                $message = "Email hoặc mật khẩu không đúng";
+                $message = "Email không đúng";
                 $result_code = 501;
             }
         } else {

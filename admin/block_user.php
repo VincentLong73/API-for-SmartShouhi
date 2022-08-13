@@ -28,19 +28,19 @@
             if($result_block) {
                 $message = "";
                 $result_code = "";
-                $message = "Bloked Successfully";
+                $message = "Chặn thành công";
                 $result_code = 200;
             } else {
                 $message = "";
                 $result_code = "";
-                $message = "Bloked Failed";
+                $message = "Chặn không thành công";
                 $result_code = 501;
             }
 
         }else{
             $message = "";
             $result_code = "";
-            $message = "Email Not exist";
+            $message = "Email không tồn tại";
             $result_code = 501;
         }
 
@@ -48,7 +48,7 @@
     $result = "";
     $result = $result_code."#".$message;
 
-    header('Content-Type: application/json');
-    echo json_encode($result);
+    header("Content-type: text/html","charset=utf-8");
+    echo html_entity_decode($result);
     
 ?>

@@ -52,27 +52,29 @@
             $query_email = "SELECT id FROM user WHERE email = '{$email}' ";   
             $result_email = mysqli_query($connect, $query_email);
 
-            if(mysqli_num_rows($result_uid) != 1){
+
+            if(mysqli_num_rows($result_email) != 1){
                 $query = "INSERT INTO user (user_name, email, pass_word, date_of_birth, date_modified, user_modified) VALUES ('$username', '$email', SHA1('$password'), '$dob', '$date_modified', '$email')";
                 mysqli_query($connect, "SET NAMES 'utf8'");
+                
     
                 $result_query = mysqli_query($connect, $query); 
                 if($result_query){
 
                     $message = "";
                     $result_code = "";
-                    $message = "Registed Successfully";
+                    $message = "Đăng ký thành công";
                     $result_code = 200;
                 }else{
                     $message = "";
                     $result_code = "";
-                    $message = "Registed Failed";
+                    $message = "Đăng ký không thành công";
                     $result_code = 501;
                 }
             }else{
                 $message = "";
                 $result_code = "";
-                $message = "Email not existed";
+                $message = "Email đã được đăng ký";
                 $result_code = 501;
             }
             
@@ -89,5 +91,5 @@
     $result = "";
     $result = $result_code."#".$message;
 
-    header('Content-Type: application/json');
-    echo json_encode($result);
+    header("Content-type: text/html","charset=utf-8");
+    echo html_entity_decode($result);

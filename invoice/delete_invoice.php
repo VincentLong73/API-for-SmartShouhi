@@ -17,26 +17,34 @@
         
         if(mysqli_num_rows($result_select_invoice) == 1) {
 
-            $query_delete_invoice = "DELETE FROM invoice WHERE id = '{$invoiceId}' ";  
-            $result_delete_invoice = mysqli_query($connect, $query_delete_invoice);
+            $query_delete_item = "DELETE FROM item WHERE invoice_id = '{$invoiceId}' ";
+            $result_delete_item = mysqli_query($connect, $query_delete_item); 
+            if($result_delete_item){
+                $query_delete_invoice = "DELETE FROM invoice WHERE id = '{$invoiceId}' ";  
+                $result_delete_invoice = mysqli_query($connect, $query_delete_invoice);
 
-            if($result_delete_invoice) {
+                if($result_delete_invoice) {
+                    $message = "";
+                    $result_code = "";
+                    $message = "Xóa hóa đơn thành công";
+                    $result_code = 200;
+                } else {
+                    $message = "";
+                    $result_code = "";
+                    $message = "Xóa hóa đơn không thành công";
+                    $result_code = 501;
+                }
+            }else{
                 $message = "";
                 $result_code = "";
-                $message = "Delete Invoice Successfully";
-                $result_code = 200;
-            } else {
-                $message = "";
-                $result_code = "";
-                $message = "Delete Invoice Failed";
+                $message = "Xóa hóa đơn không thành công";
                 $result_code = 501;
             }
             
         } else {
-            // $message = "Invoice Not Exist";
             $message = "";
             $result_code = "";
-            $message = "Invoice Not Exist";
+            $message = "Hóa đơn không tồn tại";
             $result_code = 501;
         }
  
@@ -44,7 +52,7 @@
     $result = "";
     $result = $result_code."#".$message;
 
-    header('Content-Type: application/json');
-    echo json_encode($result);
+    header("Content-type: text/html","charset=utf-8");
+    echo html_entity_decode($result);
     
 ?>

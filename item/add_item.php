@@ -30,12 +30,12 @@
             if($result_query){
                 $message = "";
                 $result_code = "";
-                $message = "Insert Item Successfully";
+                $message = "Thêm sản phẩm thành công";
                 $result_code = 200;
             }else{
                 $message = "";
                 $result_code = "";
-                $message = "Insert Item Failed";
+                $message = "Thêm sản phẩm không thành công";
                 $result_code = 501;
             }
         } 
@@ -44,6 +44,6 @@
     $result = "";
     $result = $result_code."#".$message;
 
-    header('Content-Type: application/json');
-    echo json_encode($result);
+    header("Content-type: text/html","charset=utf-8");
+    echo html_entity_decode($result);
 ?>
